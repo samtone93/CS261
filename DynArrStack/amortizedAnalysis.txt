@@ -1,0 +1,56 @@
+/* CS261 - Assignment 2 - Part 2*/
+/* Name: Samantha Tone
+ * Date: 4/23/18
+ * Solution description: Amortized Analysis of the Dynamic Array (written)
+ */
+
+Q1. How many cost units are spent in the entire process of performing 40 consecutive push operations on an empty array which starts out
+at capacity 8, assuming that the array will double in capacity each time a new item is added to an already full dynamic array? As N
+(ie. the number of pushes) grows large, under this strategy for resizing, what is the average big-oh complexity for a push?
+
+A1a.
+- Since the array's initial size is 8, the cost of the first 8 elements is 8
+- Adding the 9th element costs (8+1) = 9 and the array is resized to 16
+- Elements 10, 11, 12, 13, 14, 15, 16 each cost 1 totaling to 7
+- Adding the 17th element costs (16+1) = 17 and the array is resized to 32
+- Elements 18, 19...31, 32 each cost 1 totaling to 15
+- Adding the 33rd element costs (32+1) = 33 and the array is resized to 64
+- Elements, 34, 35, 36, 37, 38, 38, 40 each cost 1 totaling to 7
+- Total cost is (8+9+7+17+15+33+7) = 96 units for adding 40 elements in this way
+
+A1b.
+- N operation of N pushes will cost 1+2+4+8+16+32+...+2^k when 2^k < N
+- Summing the series gives 2^(k-1) - 2
+- However, 2^k <= n <= 2^(k-1)
+- Total cost of sequence of n insertions: O(n)
+- Amortized (average) cost (total cost/n): O(1)
+
+Q2. How many cost units are spent in the entire process of performing 40 consecutive push operations on an empty array which starts out
+at capacity 8, assuming that the array will grow by a constant 2 spaces each time a new item is added to an already full dynamic
+array? As N (ie. the number of pushes) grows large, under this strategy for resizing, what is the average big-oh complexity for a
+push?
+
+A2a.
+- Since the array's initial size is 8, the cost of the first 8 elements is 8
+- Adding the 9th element costs (8+1) = 9 and the array is resized to 10
+- Element 10 costs 1
+- Adding the 11th element cost (10+1) = 11 and the array is resized to 12
+- Element 12 costs 1
+- Adding the 13th element cost (12+1) = 13 and the array is resized to 14
+- Element 14 costs 1
+- Adding the 15th element cost (14+1) = 15 and the array is resized to 16
+- Element 16 costs 1
+- Adding the 17th element cost (16+1) = 17 and the array is resized to 18
+- Element 18 costs 1
+- Adding the 19th element cost (18+1) = 19 and the array is resized to 20
+...
+- Element 38 costs 1
+- Adding the 11th element cost (38+1) = 39 and the array is resized to 40
+- Element 40 costs 1
+- Total cost is (8+9+1+11+1+13+1+15+1+17+1+19+...+1+39+1) = 408 units for adding 40 elements in this way
+
+A2b.
+- N operations of N pushes will cost 1+2+3+4+5+6+...+N+1
+- Summing the series gives N(N-1)/2
+- Total cost of sequence of n insertions: O(n^2)
+- Amortized (average) cost (total cost/n): O(n)
