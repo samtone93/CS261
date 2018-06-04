@@ -1,2 +1,2 @@
-# CS261
-Projects from OSU CS290 course (Spring18)
+# HashMap
+Implementation of hash map, concordance and spell checker
